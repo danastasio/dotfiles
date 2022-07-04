@@ -1,10 +1,7 @@
 set number
 set undofile
 set cursorline
-syntax on
-
 set noet ci pi sts=0 sw=4 ts=4 sr
-autocmd FileType python setlocal ts=4 sw=4 sts=0 pi ci noet sr
 set backspace=indent,eol,start
 set noerrorbells
 set guifont=Symbols\ Nerd\ Font
@@ -12,6 +9,9 @@ set showbreak=>>
 set listchars+=eol:\ 
 set autowrite
 set autochdir
+syntax on
+
+" Functions
 fun! CustomSyntax()
 	" add in to syntax hilighting
 	syn match cppStatement /\%( in \)\|\%( in \)/
@@ -22,8 +22,12 @@ fun! CustomSyntax()
 	hi link cppType Type
 
 endfu
+
+" Auto cmds
 autocmd bufenter * :call CustomSyntax()
 autocmd filetype * :call CustomSyntax()
+autocmd FileType python setlocal ts=4 sw=4 sts=0 pi ci noet sr
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " add cursorline when not in insert mode
 augroup cursorLine
@@ -33,7 +37,35 @@ augroup cursorLine
   autocmd InsertEnter * set nocul
 augroup END
 
+" fixes lag of exiting insert/visual mode
+if !has('gui_running')
+	set ttimeoutlen=10
+	augroup FastEscape
+	autocmd!
+	autocmd InsertEnter * set timeoutlen=0
+	autocmd InsertLeave * set timeoutlen=1000
+	augroup END
+endif
+
+" Override colors
+augroup vimrc
+	autocmd!
+	autocmd ColorScheme * highlight clear Search
+		\ | highlight Search ctermbg=None ctermfg=None guibg=Grey42
+	autocmd ColorScheme * highlight CocHighlightText ctermbg=None ctermfg=None guibg=Grey35
+augroup END
+
+
+" Easy tree open
+nnoremap <C-t> :NERDTreeToggle<CR>
+set encoding=UTF-8
+
+" change cursor shape
+let &t_SR = "\<Esc>[4 q"                        " replace mode, underscore
+let &t_EI = "\<Esc>[2 q"                        " normal mode, block
+
 call plug#begin('~/.config/nvim/plugged')
+	" Install plugins
 	Plug 'ryanoasis/vim-devicons'					" NERDTree icons
 	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'	" Icon colors
 	Plug 'preservim/nerdtree'						" File navigation
@@ -45,6 +77,8 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'xolox/vim-session'						" Save sessions
 	Plug 'xolox/vim-misc'							" Dependency
 call plug#end()
+
+" Plugin Configuration Options
 " Airline {
 	let g:airline_theme='bubblegum'				 " status bar theme
 	let g:airline_mode_map = {}
@@ -77,35 +111,6 @@ call plug#end()
 	let g:indentguides_spacechar = '|'			" indent guide chars
 	let g:indentguides_tabchar = '|'
 " }
-
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-" Easy tree open
-nnoremap <C-t> :NERDTreeToggle<CR>
-set encoding=UTF-8
-
-" change cursor shape
-"let &t_SI = "\<Esc>[6 q"                        " insert mode, vertical bar
-let &t_SR = "\<Esc>[4 q"                        " replace mode, underscore
-let &t_EI = "\<Esc>[2 q"                        " normal mode, block
-
-" fixes lag of exiting insert/visual mode
-if !has('gui_running')
-	set ttimeoutlen=10
-	augroup FastEscape
-	autocmd!
-	autocmd InsertEnter * set timeoutlen=0
-	autocmd InsertLeave * set timeoutlen=1000
-	augroup END
-endif
-
-" Override colors
-augroup vimrc
-	autocmd!
-	autocmd ColorScheme * highlight clear Search
-		\ | highlight Search ctermbg=None ctermfg=None guibg=Grey42
-	autocmd ColorScheme * highlight CocHighlightText ctermbg=None ctermfg=None guibg=Grey35
-augroup END
 
 " Vim-Session {
 	let g:session_autosave = 'yes'			" auto save session periodically
