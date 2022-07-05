@@ -9,6 +9,8 @@ set showbreak=>>
 set listchars+=eol:\ 
 set autowrite
 set autochdir
+set mouse=a
+set clipboard=unnamedplus
 syntax on
 
 " Functions
@@ -64,6 +66,9 @@ set encoding=UTF-8
 let &t_SR = "\<Esc>[4 q"                        " replace mode, underscore
 let &t_EI = "\<Esc>[2 q"                        " normal mode, block
 
+" Open undo tree
+nnoremap <C-u> :UndotreeToggle<CR>
+
 call plug#begin('~/.config/nvim/plugged')
 	" Install plugins
 	Plug 'ryanoasis/vim-devicons'					" NERDTree icons
@@ -76,6 +81,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'airblade/vim-gitgutter'					" Git Integrations
 	Plug 'xolox/vim-session'						" Save sessions
 	Plug 'xolox/vim-misc'							" Dependency
+	Plug 'mbbill/undotree'
 call plug#end()
 
 " Plugin Configuration Options
@@ -83,6 +89,7 @@ call plug#end()
 	let g:airline_theme='bubblegum'				 " status bar theme
 	let g:airline_mode_map = {}
 	let g:airline_mode_map['ic'] = 'INSERT'
+	let g:airline_mode_map['R'] = 'REPLACE'
 	" display all buffers if one tab open
 	let g:airline#extensions#tabline#enabled = 1
 	let g:airline#extensions#tabline#tab_nr_type = 1	" buffer/tab number
@@ -118,3 +125,6 @@ call plug#end()
 	let g:session_default_to_last = 1		" Prompt to open last session
 " }
 
+" Undo tree {
+	let g:undotree_WindowLayout = 2
+" }
