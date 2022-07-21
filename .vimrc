@@ -18,7 +18,10 @@ syntax on
 
 let g:python_recommended_style = 0
 let g:rust_recommended_style = 0
+
+" Custom Macros
 let @o = ':% s/^/REPLACEME|/:% s/$/|enabled|OBSERVER/ggOEXTERNAL_OBSERVER_KEY|EXTERNAL_USER_KEY|ROW_STATUS|DATA_SOURCE_KEY€ýa:noh:% s/REPLACEME/athletic'
+let @c = ':% s/^/REPLACEME,/:% s/$/,S/:% s/REPLACEME/course-'
 
 " Key Bindings
 nnoremap <C-t> :NERDTreeToggle<CR>
@@ -45,9 +48,9 @@ fun! CustomSyntax()
 endfu
 
 " Auto cmds
-autocmd bufenter * :call CustomSyntax()
-autocmd filetype cpp :call CustomSyntax()
-autocmd FileType python setlocal ts=4 sw=4 sts=0 pi ci noet sr
+autocmd bufenter * :call CustomSyntax()											" Set C++ syntax
+autocmd filetype cpp :call CustomSyntax()										" Set C++ syntax
+autocmd FileType python setlocal ts=4 sw=4 sts=0 pi ci noet sr					" Custom python formatting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " add cursorline when not in insert mode
@@ -147,3 +150,7 @@ call plug#end()
 	let g:undotree_WindowLayout = 2
 " }
 
+" Vim-Colors {
+	colorscheme gruvbox
+	set background=dark
+" }
