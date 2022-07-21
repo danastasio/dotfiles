@@ -30,6 +30,8 @@ nnoremap <space> za
 vnoremap <space> zf
 nnoremap <C-u> :UndotreeToggle<CR>
 noremap <C-m> :SignatureToggle<CR>
+nnoremap <C-k> <C-u>
+nnoremap <C-j> <C-d>
 
 " Fat finger proof closing vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
@@ -104,7 +106,7 @@ call plug#end()
 
 " Plugin Configuration Options
 " Airline {
-	let g:airline_theme='bubblegum'				 		" status bar theme
+	let g:airline_theme='gruvbox'				 		" status bar theme
 	let g:airline_mode_map = {}
 	let g:airline_mode_map['ic'] = 'INSERT'
 	let g:airline_mode_map['R'] = 'REPLACE'
