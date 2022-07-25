@@ -1,0 +1,23 @@
+# IMAP Config
+set ssl_verify_host=no
+set ssl_use_tlsv1_3=yes
+set imap_authenticators="login:digest-md5:cram-md5"
+set spoolfile={outlook.office365.com/ssl}INBOX
+set folder={outlook.office365.com/ssl}
+set imap_user="david.d.anastasio@uconn.edu"
+set record="{outlook.office365.com/ssl}Sent Items"
+set postponed="{outlook.office365.com/ssl}Drafts"
+set mail_check=30
+set timeout=60
+set sort=reverse-date
+
+#SMTP Config:
+
+set hidden_host=yes
+set smtp_authenticators = "login"
+set ssl_starttls = yes
+set ssl_force_tls = yes
+set from="david.d.anastasio@uconn.edu"
+set realname="David Anastasio"
+set smtp_url = "smtp://david.d.anastasio@outlook.office365.com:587/"
+
