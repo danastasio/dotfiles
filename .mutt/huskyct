@@ -1,0 +1,11 @@
+# IMAP
+set imap_user="david.d.anastasio@uconn.edu\\huskyct@uconn.edu"
+set imap_pass=`secret-tool lookup user david.d.anastasio@uconn.edu`
+
+# SMTP
+set from="huskyct@uconn.edu"
+set realname="ITS - HuskyCT"
+set smtp_url = "smtp://david.d.anastasio@uconn.edu@outlook.office365.com:587/"
+
+account-hook $folder "set imap_user='david.d.anastasio@uconn.edu\\huskyct@uconn.edu'"
+

@@ -1,23 +1,43 @@
+# Global Configs
+source ~/.mutt/gruvbox/colors-gruvbox-shuber.muttrc
+set editor='flatpak run org.vim.Vim'
+set signature = '$HOME/.mutt/signature'
+set sort=threads
+set sort_aux=last-date-received
+set fast_reply
+
+# HTML Options
+set mailcap_path = "~/.mutt/mailcap"
+set content_type = 'text/html'
+alternative_order text/html text/plain
+
 # IMAP Config
 set ssl_verify_host=no
 set ssl_use_tlsv1_3=yes
 set imap_authenticators="login:digest-md5:cram-md5"
 set spoolfile={outlook.office365.com/ssl}INBOX
 set folder={outlook.office365.com/ssl}
-set imap_user="david.d.anastasio@uconn.edu"
 set record="{outlook.office365.com/ssl}Sent Items"
 set postponed="{outlook.office365.com/ssl}Drafts"
 set mail_check=30
 set timeout=60
-set sort=reverse-date
+set sort=threads
+set sort_aux=reverse-date
 
 #SMTP Config:
-
 set hidden_host=yes
 set smtp_authenticators = "login"
 set ssl_starttls = yes
 set ssl_force_tls = yes
-set from="david.d.anastasio@uconn.edu"
-set realname="David Anastasio"
-set smtp_url = "smtp://david.d.anastasio@outlook.office365.com:587/"
 
+# Default Account
+source $HOME/.mutt/personal
+
+# Account 1
+folder-hook 'david.d.anastasio@uconn.edu' 'source $HOME/.mutt/personal'
+
+# Account 2
+folder-hook 'huskyct@uconn.edu' 'source ~/.mutt/huskyct'
+
+macro index <f6> '<sync-mailbox><enter-command>source ~/.mutt/personal<enter><change-folder>!<enter>'
+macro index <f7> '<sync-mailbox><enter-command>source ~/.mutt/huskyct<enter><change-folder>!<enter>'
