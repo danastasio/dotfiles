@@ -18,20 +18,21 @@ syntax on
 
 let g:python_recommended_style = 0		" Override python style (use hard tabs)
 let g:rust_recommended_style = 0		" Override rust style (use hard tabs)
+let mapleader = ";"
 
 " Custom Macros
 let @o = ':% s/^/REPLACEME|/:% s/$/|enabled|OBSERVER/ggOEXTERNAL_OBSERVER_KEY|EXTERNAL_USER_KEY|ROW_STATUS|DATA_SOURCE_KEY€ýa:noh:% s/REPLACEME/athletic'
 let @c = ':% s/^/REPLACEME,/:% s/$/,S/:% s/REPLACEME/course-'
 
 " Key Bindings
-nnoremap <C-t> :NERDTreeToggle<CR>
-noremap <C-n> :set number!<CR>
+map <leader>t :NERDTreeToggle<CR>
+map <leader>n :set number!<CR>
+map <leader>u :UndotreeToggle<CR>
+map <leader>m :SignatureToggle<CR>
+map <leader>k <C-u><CR>
+map <leader>j <C-d><CR>
 nnoremap <space> za
 vnoremap <space> zf
-nnoremap <C-u> :UndotreeToggle<CR>
-noremap <C-m> :SignatureToggle<CR>
-nnoremap <C-k> <C-u>
-nnoremap <C-j> <C-d>
 
 " Fat finger proof closing vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
@@ -39,15 +40,15 @@ cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('
 cnoreabbrev <expr> WQ ((getcmdtype() is# ':' && getcmdline() is# 'WQ')?('wq'):('WQ'))
 
 " Functions
-fun! CustomSyntax()
-	" add in to syntax hilighting
+def CustomSyntax()
+	# add in to syntax hilighting
 	syn match cppStatement /\%( in \)\|\%( in \)/
 	hi link cppStatement Statement
 
-	" add strings to syntax hilighting
+	# add strings to syntax hilighting
 	syn match cppType /\%(string\)/
 	hi link cppType Type
-endfu
+enddef
 
 " Auto cmds
 autocmd bufenter * :call CustomSyntax()											" Set C++ syntax
@@ -90,6 +91,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'ryanoasis/vim-devicons'					" NERDTree icons
 	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'	" Icon colors
 	Plug 'preservim/nerdtree'						" File navigation
+	Plug 'preservim/nerdcommenter'					" Better Comments
 	Plug 'vim-airline/vim-airline'					" Bottom Bar
 	Plug 'vim-airline/vim-airline-themes'			" Themes
 	Plug 'thaerkh/vim-indentguides'					" Indentation
