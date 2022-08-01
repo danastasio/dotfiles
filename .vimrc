@@ -31,6 +31,7 @@ map <leader>u :UndotreeToggle<CR>
 map <leader>m :SignatureToggle<CR>
 map <leader>k <C-u><CR>
 map <leader>j <C-d><CR>
+map <leader>b :bn<CR>
 nnoremap <space> za
 vnoremap <space> zf
 
@@ -38,6 +39,9 @@ vnoremap <space> zf
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 cnoreabbrev <expr> Wq ((getcmdtype() is# ':' && getcmdline() is# 'Wq')?('wq'):('Wq'))
 cnoreabbrev <expr> WQ ((getcmdtype() is# ':' && getcmdline() is# 'WQ')?('wq'):('WQ'))
+cnoreabbrev <expr> qw ((getcmdtype() is# ':' && getcmdline() is# 'qw')?('wq'):('qw'))
+cnoreabbrev <expr> qW ((getcmdtype() is# ':' && getcmdline() is# 'qW')?('wq'):('qW'))
+cnoreabbrev <expr> QW ((getcmdtype() is# ':' && getcmdline() is# 'QW')?('wq'):('QW'))
 
 " Functions
 def CustomSyntax()
